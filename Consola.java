@@ -24,7 +24,7 @@ public class Consola{
       filas[i] = fila;
     }
 
-    for (String s : filas) System.out.println(s);
+    
     //Para elegir como trabajará el programa
     System.out.println("Especifique si quiere trabajar iterativamente(1) o recursivamente(2)");
     Scanner input20 = new Scanner(System.in);
