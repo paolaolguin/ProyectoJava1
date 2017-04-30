@@ -51,11 +51,21 @@
   consideraciones que se mencionarán a continuación:
     \begin{enumerate}
     \item Las filas son de un número impar de triángulos menores,
-    lo cual implica que la mayor área posible va a ser \(n^2\), con n siendo el
+    lo cual implica que la mayor área posible va a ser \(n^2\), con \(n\) siendo el
     número de filas del triángulo mayor, y la menor área posible será 0,
     en el caso que el triángulo mayor se componga únicamente de triángulos
-    negros.
-    \item blah
+    negros. Esto puesto que $\sum_{i=0}^{n} 2{i}+1 = {n}^2$
+    \item Teniendo lo anterior en mente, si en la fila \(n-1\) (considerando la
+    primera como 0), nos encontramos un triangulito negro, sabemos enseguida
+    que la mayor área ya no puede ser \({n}^2\), sino que \({(n-1)}^2\). Esto, sin embargo,
+    no nos dice demasiado, siendo que el triángulo blanco puede formarse hacia
+    arriba (hacia la base) o hacia abajo (la punta), y puede formarse por
+    partes de filas sin considerarlas enteras.
+    \item Retomando la consideración, puesto que las filas que componen el
+    triángulo mayor son todas impares, ningún triángulo blanco puede tener
+    una fila con un número par de triángulos menores.
+
+
     \end{enumerate}
 
   \begin{center}
