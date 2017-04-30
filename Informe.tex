@@ -1,13 +1,11 @@
-\documentclass[spanish]{article}
+\documentclass{article}
 \usepackage{graphicx}
-\usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage{subcaption}
 
-\title{Informe Métodos de Programación}
+
+\title{Informe M\'etodos de Programaci\'on}
 \date{04/2017}
 \author{Paola Olgu\'in}
-
-\graphicspath{ {imagenes/}}
 
 \begin{document}
 
@@ -21,7 +19,7 @@
 
   \tableofcontents{}
 
-  \section{Introducción}
+  \section{Introducci\'on}
   Aqui va a ir la introduccion. Incluir informacion sobre Java, diagramas de flujo,
   diagramas de clase, diagramas de sucesion, programacion orientada a objetos.
 
@@ -37,40 +35,56 @@
   \section{Descripci\'on del problema}
 
   \par
-  El problema a solucionar es el de, dado un triángulo de n filas,
-  formado por triángulos más pequeños de color negro o blanco, hallar si hay
-  triángulos formados únicamente de triángulos blancos dentro del triángulo
-  mayor. Si se encuentra más de uno, reconocer el mayor, e imprimir por pantalla
-  que el triángulo es de área a; donde a es la suma de todos los blancos que
-  componen el triángulo hallado.\par
-  Para menor confusión, se hablará de triángulo mayor para
-  referirnos al triángulo formado por los menores de ambos colores, triángulo
-  blanco para referirnos al mayor triángulo formado únicamente por blancos, y
-  triángulos menores para los de menor tamaño.\par
-  Para poder analizar bien el problema, se tomó en cuenta ciertas
-  consideraciones que se mencionarán a continuación:
+  El problema a solucionar es el de, dado un tri\'angulo de n filas,
+  formado por tri\'angulos m\'as pequeños de color negro y blanco, hallar si hay
+  tri\'angulos formados \'unicamente de tri\'angulos blancos dentro del tri\'angulo
+  mayor. Si se encuentra m\'as de uno, reconocer el mayor, e imprimir por pantalla
+  que el tri\'angulo es de \'area a; donde a es la suma de todos los blancos que
+  componen el tri\'angulo hallado.\par
+
+    \begin{center}
+      \includegraphics[scale = 0.5, angle = 180]{triangulo1}
+    \end{center}
+
+  Para menor confusi\'on, se hablar\'a de tri\'angulo mayor para
+  referirnos al tri\'angulo formado por los menores de ambos colores, tri\'angulo
+  blanco para referirnos al mayor tri\'angulo formado \'unicamente por blancos, y
+  tri\'angulos menores para los de menor tamaño.\par
+
+  Para poder analizar bien el problema, se tom\'o en cuenta ciertas
+  consideraciones que se mencionar\'an a continuaci\'on:
     \begin{enumerate}
-    \item Las filas son de un número impar de triángulos menores,
-    lo cual implica que la mayor área posible va a ser \(n^2\), con \(n\) siendo el
-    número de filas del triángulo mayor, y la menor área posible será 0,
-    en el caso que el triángulo mayor se componga únicamente de triángulos
+    \item Las filas son de un n\'umero impar de tri\'angulos menores,
+    lo cual implica que la mayor \'area posible va a ser \(n^2\), con \(n\) siendo el
+    n\'umero de filas del tri\'angulo mayor, y la menor \'area posible ser\'a 0,
+    en el caso que el tri\'angulo mayor se componga \'unicamente de tri\'angulos
     negros. Esto puesto que $\sum_{i=0}^{n} 2{i}+1 = {n}^2$
     \item Teniendo lo anterior en mente, si en la fila \(n-1\) (considerando la
     primera como 0), nos encontramos un triangulito negro, sabemos enseguida
-    que la mayor área ya no puede ser \({n}^2\), sino que \({(n-1)}^2\). Esto, sin embargo,
-    no nos dice demasiado, siendo que el triángulo blanco puede formarse hacia
+    que la mayor \'area ya no puede ser \({n}^2\), sino que \({(n-1)}^2\). Esto, sin embargo,
+    no nos dice demasiado, siendo que el tri\'angulo blanco puede formarse hacia
     arriba (hacia la base) o hacia abajo (la punta), y puede formarse por
     partes de filas sin considerarlas enteras.
-    \item Retomando la consideración, puesto que las filas que componen el
-    triángulo mayor son todas impares, ningún triángulo blanco puede tener
-    una fila con un número par de triángulos menores.
-
-
+    \item Retomando la consideraci\'on, puesto que las filas que componen el
+    tri\'angulo mayor son todas impares, ning\'un tri\'angulo blanco puede tener
+    una fila con un n\'umero par de tri\'angulos menores.
+    \item Cada fila empieza y termina con un tri\'angulo hacia la punta, lo que
+    implica que los \'indices pares de las filas apuntan en esa direcci\'on y
+    los \'indices impares apuntan hacia la base. La direcci\'on de un tri\'angulo
+    se define, entonces, por hacia donde apuntan los extremos de la base, o,
+    en su defecto, hacia donde mira la punta.
+    \item Cada fila m\'as grande, tiene dos elementos m\'as que la
+    anterior.
+    \item Se consideran como tri\'angulos \'unicamente los que ser\'ian un
+    tri\'angulo que nosotros podamos reconocer visualmente. Por
+    lo tanto en un c\'odigo como el de la () reconocer\'ia un
+    \'area de uno, puesto que su representaci\'on gr\'afica no nos
+    muestra un tri\'angulo. En cambio, uno como el de la ()
+    reconocer\'ia un \'area de cuatro.
     \end{enumerate}
 
-  \begin{center}
-  \includegraphics[scale = 0.5, angle = 180]{triangulo1}
-  \end{center}
+  \section{Algoritmos}
+  \subsection{Iteraci\'on}
 
 
 \end{document}
