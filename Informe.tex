@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[letterpaper]{article}
 \usepackage{graphicx}
 \usepackage{subcaption}
 
@@ -18,7 +18,7 @@
   \pagenumbering{arabic}
 
   \tableofcontents{}
-
+  \newpage
   \section{Introducci\'on}
   Aqui va a ir la introduccion. Incluir informacion sobre Java, diagramas de flujo,
   diagramas de clase, diagramas de sucesion, programacion orientada a objetos.
@@ -42,9 +42,11 @@
   que el tri\'angulo es de \'area a; donde a es la suma de todos los blancos que
   componen el tri\'angulo hallado.\par
 
-    \begin{center}
+    \begin{figure}[h!]
+      \centering
       \includegraphics[scale = 0.5, angle = 180]{triangulo1}
-    \end{center}
+      \caption{Ejemplo}
+    \end{figure}
 
   Para menor confusi\'on, se hablar\'a de tri\'angulo mayor para
   referirnos al tri\'angulo formado por los menores de ambos colores, tri\'angulo
@@ -53,7 +55,7 @@
 
   Para poder analizar bien el problema, se tom\'o en cuenta ciertas
   consideraciones que se mencionar\'an a continuaci\'on:
-    \begin{enumerate}
+    \begin{itemize}
     \item Las filas son de un n\'umero impar de tri\'angulos menores,
     lo cual implica que la mayor \'area posible va a ser \(n^2\), con \(n\) siendo el
     n\'umero de filas del tri\'angulo mayor, y la menor \'area posible ser\'a 0,
@@ -77,14 +79,88 @@
     anterior.
     \item Se consideran como tri\'angulos \'unicamente los que ser\'ian un
     tri\'angulo que nosotros podamos reconocer visualmente. Por
-    lo tanto en un c\'odigo como el de la () reconocer\'ia un
+    lo tanto en un c\'odigo como el de la figura \ref{subfig:B} reconocer\'ia un
     \'area de uno, puesto que su representaci\'on gr\'afica no nos
-    muestra un tri\'angulo. En cambio, uno como el de la ()
-    reconocer\'ia un \'area de cuatro.
-    \end{enumerate}
+    muestra un tri\'angulo. En cambio, uno como el de la figura \ref{subfig:A} reconocer\'ia un\'area de cuatro.
+    \end{itemize}
 
-  \section{Algoritmos}
+    % No se como hacer que estas imagenes se pongan bien
+    \begin{figure}
+      \centering
+      \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=0.7\linewidth]{rialtriangulo}
+        \caption{Tri\'angulo blanco mayor con \'area 4.}
+        \label{subfig:A}
+      \end{subfigure}
+      \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=0.7\linewidth]{notriangulo}
+        \caption{Tri\'angulo blanco mayor corresponde a un \'unico tri\'angulo peque\~no}
+        \label{subfig:B}
+      \end{subfigure}
+      \caption{Visualizaci\'on}
+    \end{figure}
+
+  \newpage
+  \section{Descrici\'on de la Soluci\'on}
+  El proyecto pide el desarrollo de dos algoritmos de resoluci\'on, uno iterativo
+  y otro recursivo. Se partir\'a hablando del primero, puesto que es el m\'as trivial
+  de ver.
   \subsection{Iteraci\'on}
-
+  La iteraci\'on se define como el acto de repetir un proceso. Esto, aplicado a las
+  ciencias de la computaci\'on o la programaci\'on repercute en un ciclo, durante
+  el cual se repite una cierta acci\'on.\par
+  En el caso del problema propuesto, la soluci\'on iterativa se pens\'o como si
+  se estuviera viendo un tri\'angulo cualquiera y se busc\'o la forma m\'as trivial
+  para encontrar los mayores tri\'angulos blancos.\par
+  La forma m\'as obvia es ir contando uno a uno los tri\'angulos blancos que forman
+  otro mayor, y comparar, de estos, cual tiene un \'area mayor. Sin embargo, esta
+  forma se vuelve muy poco eficiente para un tri\'angulo de muchas filas, puesto
+  que se estar\'ia sumando uno a uno los tri\'angulos peque\~nos, para luego almacenar
+  cada cantidad obtenida para sacar la mayor entre ellas. Adem\'as hemos de considerar
+  que un programa no tiene c\'omo ver si algo es un tri\'angulo o no. Por eso, gracias
+  a las consideraciones tomadas anteriormente podemos optimizar un poco la b\'usqueda.
+  \begin{enumerate}
+    \item Como un tri\'angulo, en cada fila, s\'olo puede tener un n\'umero impar de
+    tri\'angulos menores, basta con saber el n\'umero de filas para saber el \'area.
+    \item Como la direcci\'on la define la punta, y \'esta de por si corresponde a
+    un tri\'angulo de los peque\~nos, con encontrar \'esta nos basta, pues el resto de la
+    figura se puede formar a partir de ah\'i.
+    \item Cada fila mayor, es dos tri\'angulos m\'as larga que la anterior.
+    \item En lugar de almacenar todas las \'areas que encontremos, almacenamos la
+    mayor hasta el momento y seguimos buscando; si se encuentra un \'area mayor, se
+    reemplaza, si no, se mantiene la actual. Como las \'areas ser\'an siempre un
+    n\'umero entero no negativo, empezamos considerando un \'area de cero.
+  \end{enumerate}
+\subsubsection{Proceso}
+Para cualquier entrada que tengamos, se hace un arreglo con el tri\'angulo mayor,
+tal que cada fila de \'este es un elemento en el arreglo. Luego, se recorre el
+arreglo, pasando por cada fila de la figura. En \'estas, se busca \'unicamente guiones,
+que representan nuestros tri\'angulos menores blancos. Dichos tri\'angulos se toman
+como una punta del tri\'angulo blanco, por lo que nos faltar\'ia ver si le podemos
+dar una base.\par
+Como se buscan tri\'angulos dentro del original que obtuvimos, tenemos que asegurar
+que la posible base no se salga del tri\'angulo como en la figura \ref{fig:baseafuera}.
+Esto se hace teniendo en mente la consideraci\'on antes mencionada; que con dos
+tri\'angulos m\'as se aumenta una fila. Entonces, dependiendo del sentido de la
+punta encontrada (dado por la paridad del \'indice donde fue encontrada), se ve
+que la base del tri\'angulo blanco no sea m\'as grande que la del tri\'angulo
+mayor, que el largo de la base sea menor que los l\'imites del mayor, y que, en
+el caso que la punta vea hacia la base del tri\'angulo mayor (\'indice impar), no
+nos pasemos de la punta del original.\par
+Una vez cumplidas esas condiciones, tenemos que ver que tengamos una base blanca,
+efectivamente. Como sabemos la fila en la que encontramos la punta, y que, de nuevo,
+una fila m\'as grande implica dos tri\'angulos m\'as, podemos calcular la cantidad
+de tri\'angulos menores que deber\'iamos encontrar en la base. Teniendo esta
+cantidad, podemos crear una base blanca y comparar si es lo mismo que tenemos bajo
+la punta hallada. Ya que cada fila corresponde a un string, se pueden dividir en
+substrings, esto es lo que se hace para verificar que estemos viendo una base
+blanca; se compara un string formado s\'olo de guiones con el substring del largo
+de la base de la punta blanca.
+  \begin{figure}[t!]
+    \centering
+    \includegraphics[scale = 0.4]{baseafuera}
+    \caption{Tri\'angulo blanco con base afuera del tri\'angulo mayor.}
+    \label{fig:baseafuera}
+  \end{figure}
 
 \end{document}
