@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 public class Archivo{
-  public static void leer_archivo(String archivo) throws FileNotFoundException, IOException {
+  public static int leer_archivo(String archivo) throws FileNotFoundException, IOException {
       Recursiva recur = new Recursiva();
       Iterativa iter = new Iterativa();
       String cadena;
@@ -43,6 +43,6 @@ public class Archivo{
       f.close();
 
       int mayor = recur.area_mayor(filas);
-      System.out.println(mayor);
+      return mayor;
   }
 }
