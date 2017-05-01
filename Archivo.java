@@ -42,7 +42,7 @@ public class Archivo{
       b.close();
       f.close();
 
-      int mayor = recur.area_mayor(filas);
+      int mayor = recur.biggus_areus(filas);
       return mayor;
   }
 }

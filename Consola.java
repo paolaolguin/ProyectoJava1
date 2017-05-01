@@ -24,7 +24,7 @@ public class Consola{
       filas[i] = fila;
     }
 
-    
+
     //Para elegir como trabajará el programa
     System.out.println("Especifique si quiere trabajar iterativamente(1) o recursivamente(2)");
     Scanner input20 = new Scanner(System.in);
@@ -33,7 +33,7 @@ public class Consola{
       mayor = iter.area_mayor(filas);
     }
     else{
-      mayor = recur.area_mayor(filas);
+      mayor = recur.biggus_areus(filas);
     }
     System.out.println(mayor);
   }
