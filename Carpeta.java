@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 public class Carpeta extends Archivo{
   static File carpeta(String[] x, String path) throws IOException{
-    File archivo = new File("archivo_nuevo.txt");
+    File archivo = new File(path + "archivo_nuevo.txt");
     int mayor = 0;
     int[] mayores = new int[x.length];
     for (int i = 0; i < x.length; i++){
