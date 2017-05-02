@@ -77,6 +77,8 @@ public class Iterativa{
     respectivamente.*/
     int max = 0; //area mayor
     for (int i = 0; i < x.length; i++){
+      //i indice fila (array)
+      // j indice string
       for (int j = 0; j < x[i].length(); j++){
         int maximo = j + 1;
         if( x[i].substring(j, maximo).equals("-")){
