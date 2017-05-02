@@ -1,7 +1,13 @@
 \documentclass[letterpaper]{article}
 \usepackage{graphicx}
 \usepackage{subcaption}
-
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick, ->, >=stealth]
 
 \title{Informe M\'etodos de Programaci\'on}
 \date{04/2017}
@@ -28,6 +34,13 @@
 
   \subsection{Diagramas}
   \subsubsection{Flujo}
+    \begin{tikzpicture}[node distance = 2cm]
+      \node (inicio) [startstop] {Inicio};
+      \node (in1) [io, below of=inicio] {Entrada};
+      
+
+    \end{tikzpicture}
+
   \subsubsection{Clase}
   \subsubsection{Sucesi\'on}
   \subsection{Programaci\'on Orientada a Objetos}
@@ -36,7 +49,7 @@
 
   \par
   El problema a solucionar es el de, dado un tri\'angulo de n filas,
-  formado por tri\'angulos m\'as pequeños de color negro y blanco, hallar si hay
+  formado por tri\'angulos m\'as peque\~nos de color negro y blanco, hallar si hay
   tri\'angulos formados \'unicamente de tri\'angulos blancos dentro del tri\'angulo
   mayor. Si se encuentra m\'as de uno, reconocer el mayor, e imprimir por pantalla
   que el tri\'angulo es de \'area a; donde a es la suma de todos los blancos que
@@ -51,7 +64,7 @@
   Para menor confusi\'on, se hablar\'a de tri\'angulo mayor para
   referirnos al tri\'angulo formado por los menores de ambos colores, tri\'angulo
   blanco para referirnos al mayor tri\'angulo formado \'unicamente por blancos, y
-  tri\'angulos menores para los de menor tamaño.\par
+  tri\'angulos menores para los de menor tama\~no.\par
 
   Para poder analizar bien el problema, se tom\'o en cuenta ciertas
   consideraciones que se mencionar\'an a continuaci\'on:
@@ -62,7 +75,7 @@
     en el caso que el tri\'angulo mayor se componga \'unicamente de tri\'angulos
     negros. Esto puesto que $\sum_{i=0}^{n} 2{i}+1 = {n}^2$
     \item Teniendo lo anterior en mente, si en la fila \(n-1\) (considerando la
-    primera como 0), nos encontramos un triangulito negro, sabemos enseguida
+    primera como 0), nos encontramos un tri\'angulo negro, sabemos enseguida
     que la mayor \'area ya no puede ser \({n}^2\), sino que \({(n-1)}^2\). Esto, sin embargo,
     no nos dice demasiado, siendo que el tri\'angulo blanco puede formarse hacia
     arriba (hacia la base) o hacia abajo (la punta), y puede formarse por
@@ -137,7 +150,7 @@ tal que cada fila de \'este es un elemento en el arreglo. Luego, se recorre el
 arreglo, pasando por cada fila de la figura. En \'estas, se busca \'unicamente guiones,
 que representan nuestros tri\'angulos menores blancos. Dichos tri\'angulos se toman
 como una punta del tri\'angulo blanco, por lo que nos faltar\'ia ver si le podemos
-dar una base.\par
+dar una base. Cabe mencionar que con hallar una punta, ya tenemos un \'area de 1.\par
 Como se buscan tri\'angulos dentro del original que obtuvimos, tenemos que asegurar
 que la posible base no se salga del tri\'angulo como en la figura \ref{fig:baseafuera}.
 Esto se hace teniendo en mente la consideraci\'on antes mencionada; que con dos
@@ -154,13 +167,19 @@ de tri\'angulos menores que deber\'iamos encontrar en la base. Teniendo esta
 cantidad, podemos crear una base blanca y comparar si es lo mismo que tenemos bajo
 la punta hallada. Ya que cada fila corresponde a un string, se pueden dividir en
 substrings, esto es lo que se hace para verificar que estemos viendo una base
-blanca; se compara un string formado s\'olo de guiones con el substring del largo
-de la base de la punta blanca.
+blanca; se compara un string formado s\'olo de guiones con el substring de lo que
+ser\'ia la base de la punta.
   \begin{figure}[t!]
     \centering
-    \includegraphics[scale = 0.4]{baseafuera}
-    \caption{Tri\'angulo blanco con base afuera del tri\'angulo mayor.}
+    \includegraphics[scale = 0.7]{baseafuera}
+    \caption{Posible tri\'angulo blanco con base afuera del tri\'angulo mayor.}
     \label{fig:baseafuera}
   \end{figure}
+  \par Como tenemos una iteraci\'on, la cantidad de veces que logremos aumentar
+  (o disminuir) filas, corresponde a la cantidad de filas que tendr\'a el
+  tri\'angulo blanco, por lo que simplemente elevamos este n\'umero al cuadrado
+  para sacar el \'area correspondiente. Luego, se compara con el n\'umero que
+  tenemos guardado, reemplaz\'andolo dependiendo de si es menor o mayor que el
+  cuadrado obtenido.
 
 \end{document}
