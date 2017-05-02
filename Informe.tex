@@ -36,29 +36,40 @@
   \newpage
   \subsubsection{Flujo}
   \begin{figure}[h]
-    \begin{subfigure}{0.99\textwidth}
-    \begin{tikzpicture}[node distance = 2cm]
-      \node (inicio) [startstop] {Inicio};
-      \node (in1) [io, below of=inicio] {Entrada};
-      \node (pro1) [process, below of=in1] {Crear Arreglo};
-      \node (pro2) [process, below of=pro1] {Iterador = 0};
-      \node (pro3) [process, below of=pro2] {Buscar guion};
-      \node (dec1) [decision, below of=pro3, yshift = -0.5cm] {Condiciones};
-      \node (pro4) [process, right of=dec1, xshift=3cm] {Ver base};
-      \node (dec2) [decision, above of=pro4, yshift = 0.5cm]{Es base};
-      \node (dec3) [decision, above of=dec2, yshift=0.5cm]{Mayor};
-      \node (dec4) [decision, above of=dec3, yshift=0.5cm, text centered, text width=2cm]{Iterador=largo};
-      \node (out1) [io, right of=dec3, xshift=3cm]{Area};
-      \node (fin) [startstop, below of= out1] {Fin};
-      \draw [arrow] (inicio) -- (in1);
-      \draw [arrow] (in1) -- (pro1);
-      \draw [arrow] (pro1) -- (pro2);
-      \draw [arrow] (pro2) -- (pro3);
-      \draw [arrow] (pro3) -- (dec1);
-      \draw [arrow] (dec1) -- (pro4);
-    \end{tikzpicture}
-    \caption{Diagrama Iterativo}
-    \end{subfigure}
+      \begin{tikzpicture}[node distance = 2cm]
+        \node (inicio) [startstop] {Inicio};
+        \node (in1) [io, below of=inicio] {Entrada};
+        \node (pro1) [process, below of=in1] {Crear Arreglo};
+        \node (pro2) [process, below of=pro1] {Iterador = 0};
+        \node (pro3) [process, below of=pro2] {Buscar guion};
+        \node (dec1) [decision, below of=pro3, yshift = -0.5cm] {Condiciones};
+        \node (pro4) [process, right of=dec1, xshift=3cm] {Ver base};
+        \node (dec2) [decision, above of=pro4, yshift = 0.5cm]{Es base};
+        \node (dec3) [decision, above of=dec2, yshift=0.5cm]{Mayor};
+        \node (dec4) [decision, above of=dec3, yshift=0.5cm, text centered, text width=2cm]{Iterador=largo};
+        \node (out1) [io, right of=dec3, xshift=3cm]{Area};
+        \node (fin) [startstop, below of= out1] {Fin};
+        \draw [arrow] (inicio) -- (in1);
+        \draw [arrow] (in1) -- (pro1);
+        \draw [arrow] (pro1) -- (pro2);
+        \draw [arrow] (pro2) -- (pro3);
+        \draw [arrow] (pro3) -- (dec1);
+        \draw [arrow] (dec1) -- (pro4);
+        \draw [arrow] (pro4) -- (dec2);
+        \draw [arrow] (dec2) -- (dec3);
+        \draw [arrow] (dec3) -- (dec4);
+        \draw [arrow] (dec3) -- (out1);
+        \draw [arrow] (dec4) -- (out1);
+        \draw [arrow] (out1) -- (fin);
+      \end{tikzpicture}
+    \caption{Iterativo}
+    \end{figure}
+    \newpage
+    \begin{figure}
+      \begin{tikzpicture}
+        \node (inicio) [startstop] {Inicio};
+      \end{tikzpicture}
+      \caption{Recursi\'on}
   \end{figure}
   \newpage
   \subsubsection{Clase}
@@ -101,7 +112,7 @@
     arriba (hacia la base) o hacia abajo (la punta), y puede formarse por
     partes de filas sin considerarlas enteras.
     \item Retomando la consideraci\'on, puesto que las filas que componen el
-    tri\'angulo mayor son todas impares, ning\'un tri\'angulo blanco puede tener
+    tri\'angulo mayor son impares, ning\'un tri\'angulo blanco puede tener
     una fila con un n\'umero par de tri\'angulos menores.
     \item Cada fila empieza y termina con un tri\'angulo hacia la punta, lo que
     implica que los \'indices pares de las filas apuntan en esa direcci\'on y
@@ -201,5 +212,24 @@ ser\'ia la base de la punta.
   para sacar el \'area correspondiente. Luego, se compara con el n\'umero que
   tenemos guardado, reemplaz\'andolo dependiendo de si es menor o mayor que el
   cuadrado obtenido.
+  \newpage
+  \subsection{Recursi\'on}
+  La recursi\'on ocurre cuando algo est\'a definido en sus propios t\'erminos,
+  es decir, que algo se define ocup\'andose a si mismo. El caso m\'as com\'un es
+  el del factorial, donde la funci\'on matem\'atica se define como;
+  $n! = n(n-1)!$
+  \par
+  Teniendo en cuenta esto, si lo aplicamos a programaci\'on, una funci\'on recursiva
+  es una funci\'on que hace un llamado a si misma para lograr lo que tiene que hacer.
+  L\'ogicamente, si no hay nada que la detenga, seguir\'ia por cuanto pueda. Es por
+  esto que se ponen casos base, los cuales corresponden a lo \'ultimo que se puede
+  llegar siguiendo la recursi\'on.\par
+
+
+
+
+
+
+
 
 \end{document}
