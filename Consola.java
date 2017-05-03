@@ -33,7 +33,7 @@ public class Consola{
       mayor = iter.area_mayor(filas);
     }
     else{
-      mayor = recur.biggus_areus(filas);
+      mayor = recur.busca_filas(filas,filas,0,0);
     }
     System.out.println(mayor);
   }

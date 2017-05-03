@@ -3,10 +3,10 @@
 \usepackage{subcaption}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [thick, ->, >=stealth]
 
 \title{Informe M\'etodos de Programaci\'on}
@@ -26,65 +26,68 @@
   \tableofcontents{}
   \newpage
   \section{Introducci\'on}
-  Aqui va a ir la introduccion. Incluir informacion sobre Java, diagramas de flujo,
-  diagramas de clase, diagramas de sucesion, programacion orientada a objetos.
+  La primera duda que surge al enfrentarnos a un problema es c\'omo abordarlo.
+  Podemos ser creativos y modelarlo, pero muchos no lo har\'an. Sin embargo,
+  resulta que pensar de qu\'e forma se puede resolver algo, descomponiendo el
+  problema en partes m\'as f\'aciles, o buscar patrones y conectarlos, sirve para
+  obtener al menos la idea de c\'omo empezar a resolver la problem\'atica. Muchas
+  veces tambi\'en sirve para llegar a la soluci\'on definitiva de la mejor forma.
+
+  La idea de este informe es presentar c\'omo se analiz\'o un problema dado y
+  c\'omo se decidi\'o abordarlo, teniendo presentes condiciones y patrones vistos
+  durante la observaci\'on inicial.
+
+  El proyecto nos pide el desarrollo de dos soluciones en Java, por lo que,
+  de igual forma, se comentar\'a un poco sobre el lenguaje antes de hablar sobre
+  los algoritmos de soluci\'on.
 
   \subsection{Java}
-  Blablablablabla
+  El lenguaje utilizado para el desarrollo del proyecto, fue Java, un lenguaje de
+  prop\'osito general y orientado a objetos. El nombre del lenguaje, curiosamente,
+  surgi\'o a partir de la costumbre de los desarrolladores de tomar un caf\'e del mismo nombre.
 
-  \subsection{Diagramas}
+  La idea detr\'as de Java era lograr un lenguaje que no necesitase recompilarse al pasar de un computador
+  a otro, es decir, se escribe el c\'odigo una \'unica vez para luego correrlo donde
+  sea necesario. Esto en ingl\'es es conocido como WORA, \textit{"write once, run anywhere"}.
+
+  Los cinco principios que ten\'ian en consideraci\'on Gosling, Sheridan y Naughton, los desarrolladores,
+  eran que el lenguaje deb\'ia:
+  \begin{enumerate}
+    \item Ser un lenguaje simple, orientado a objetos y familiar.
+    \item Ser neutral a la arquitectura y portable.
+    \item Tener un alto rendimiento de ejecuci\'on.
+    \item Ser interpretado, enhebrado y din\'amico.
+    \item Ser robusto y seguro.
+  \end{enumerate}
   \newpage
-  \subsubsection{Flujo}
-  \begin{figure}[h]
-      \begin{tikzpicture}[node distance = 2cm]
-        \node (inicio) [startstop] {Inicio};
-        \node (in1) [io, below of=inicio] {Entrada};
-        \node (pro1) [process, below of=in1] {Crear Arreglo};
-        \node (pro2) [process, below of=pro1] {Iterador = 0};
-        \node (pro3) [process, below of=pro2] {Buscar guion};
-        \node (dec1) [decision, below of=pro3, yshift = -0.5cm] {Condiciones};
-        \node (pro4) [process, right of=dec1, xshift=3cm] {Ver base};
-        \node (dec2) [decision, above of=pro4, yshift = 0.5cm]{Es base};
-        \node (dec3) [decision, above of=dec2, yshift=0.5cm]{Mayor};
-        \node (dec4) [decision, above of=dec3, yshift=0.5cm, text centered, text width=2cm]{Iterador=largo};
-        \node (out1) [io, right of=dec3, xshift=3cm]{Area};
-        \node (fin) [startstop, below of= out1] {Fin};
-        \draw [arrow] (inicio) -- (in1);
-        \draw [arrow] (in1) -- (pro1);
-        \draw [arrow] (pro1) -- (pro2);
-        \draw [arrow] (pro2) -- (pro3);
-        \draw [arrow] (pro3) -- (dec1);
-        \draw [arrow] (dec1) -- (pro4);
-        \draw [arrow] (pro4) -- (dec2);
-        \draw [arrow] (dec2) -- (dec3);
-        \draw [arrow] (dec3) -- (dec4);
-        \draw [arrow] (dec3) -- (out1);
-        \draw [arrow] (dec4) -- (out1);
-        \draw [arrow] (out1) -- (fin);
-      \end{tikzpicture}
-    \caption{Iterativo}
-    \end{figure}
-    \newpage
-    \begin{figure}
-      \begin{tikzpicture}
-        \node (inicio) [startstop] {Inicio};
-      \end{tikzpicture}
-      \caption{Recursi\'on}
-  \end{figure}
-  \newpage
-  \subsubsection{Clase}
-  \subsubsection{Sucesi\'on}
   \subsection{Programaci\'on Orientada a Objetos}
+  Los paradigmas de programaci\'on son formas de clasificar a los distintos idiomas
+  seg\'un las caracter\'isticas que tengan. Uno de estos paradigmas es la orientaci\'on
+  a objetos, la cual se basa en el concepto de objeto, el cual contiene datos,
+  en un campo (usualmente catalogado como atributo), y procedimientos (m\'etodos).
+
+  Com\'unmente, los lenguajes que son orientados a objetos utilizan herencia, para
+  reutilizar c\'odigos ya elaborados. En el caso de Java, esto se hace con clases y
+  objetos, los \'ultimos siendo una instancia de la clase. Las clases pueden heredar
+  m\'etodos y atributos de otra clase, agregando otros a la propia. As\'i,
+  por ejemplo, podemos considerar una clase SerVivo, que contiene el m\'etodo
+  RespiracionCelular, y luego la clase Perro, que hereda este m\'etodo, y adem\'as
+  considera el m\'etodo Ladrar. Una instancia es un ente espec\'ifico de una
+  clase. En el ejemplo anterior, podr\'iamos definir un Andy, de la clase Perro. Andy,
+  por ser de dicha clase puede tanto ladrar como respirar.
+
+
   \newpage
   \section{Descripci\'on del problema}
 
-  \par
+
   El problema a solucionar es el de, dado un tri\'angulo de n filas,
   formado por tri\'angulos m\'as peque\~nos de color negro y blanco, hallar si hay
   tri\'angulos formados \'unicamente de tri\'angulos blancos dentro del tri\'angulo
   mayor. Si se encuentra m\'as de uno, reconocer el mayor, e imprimir por pantalla
   que el tri\'angulo es de \'area a; donde a es la suma de todos los blancos que
-  componen el tri\'angulo hallado.\par
+  componen el tri\'angulo hallado.
+
 
     \begin{figure}[h!]
       \centering
@@ -95,7 +98,8 @@
   Para menor confusi\'on, se hablar\'a de tri\'angulo mayor para
   referirnos al tri\'angulo formado por los menores de ambos colores, tri\'angulo
   blanco para referirnos al mayor tri\'angulo formado \'unicamente por blancos, y
-  tri\'angulos menores para los de menor tama\~no.\par
+  tri\'angulos menores para los de menor tama\~no.
+
 
   Para poder analizar bien el problema, se tom\'o en cuenta ciertas
   consideraciones que se mencionar\'an a continuaci\'on:
@@ -112,20 +116,23 @@
     arriba (hacia la base) o hacia abajo (la punta), y puede formarse por
     partes de filas sin considerarlas enteras.
     \item Retomando la consideraci\'on, puesto que las filas que componen el
-    tri\'angulo mayor son impares, ning\'un tri\'angulo blanco puede tener
+    tri\'angulo que nos entregan son impares, ning\'un tri\'angulo blanco puede tener
     una fila con un n\'umero par de tri\'angulos menores.
-    \item Cada fila empieza y termina con un tri\'angulo hacia la punta, lo que
-    implica que los \'indices pares de las filas apuntan en esa direcci\'on y
+    \item Cada fila empieza y termina con un tri\'angulo hacia la punta, por lo
+    que los \'indices pares de las filas apuntan en esa direcci\'on y
     los \'indices impares apuntan hacia la base. La direcci\'on de un tri\'angulo
     se define, entonces, por hacia donde apuntan los extremos de la base, o,
     en su defecto, hacia donde mira la punta.
     \item Cada fila m\'as grande, tiene dos elementos m\'as que la
     anterior.
+    \item Notemos que cada tri\'angulo mayor se puede descomponer en dos tri\'angulos
+    menores que apuntan hacia la misma direcci\'on que el original.
     \item Se consideran como tri\'angulos \'unicamente los que ser\'ian un
     tri\'angulo que nosotros podamos reconocer visualmente. Por
     lo tanto en un c\'odigo como el de la figura \ref{subfig:notriangulo} reconocer\'ia un
     \'area de uno, puesto que su representaci\'on gr\'afica no nos
-    muestra un tri\'angulo. En cambio, uno como el de la figura \ref{subfig:rialtriangulo} reconocer\'ia un\'area de cuatro.
+    muestra un tri\'angulo. En cambio, uno como el de la figura \ref{subfig:rialtriangulo}
+    reconocer\'ia un \'area de cuatro.
     \end{itemize}
 
     % No se como hacer que estas imagenes se pongan bien
@@ -148,14 +155,91 @@
   \section{Descrici\'on de la Soluci\'on}
   El proyecto pide el desarrollo de dos algoritmos de resoluci\'on, uno iterativo
   y otro recursivo. Se partir\'a hablando del primero, puesto que es el m\'as trivial
-  de ver.
+  de ver. Se agregan tambi\'en los diagramas representando el flujo y la relaci\'on
+  entre clases.
+
+  \subsection{Diagramas}
+  \subsubsection{Flujo}
+  \begin{figure}[h]
+      \begin{tikzpicture}[node distance = 2cm]
+        \node (inicio) [startstop] {Inicio};
+        \node (in1) [io, below of=inicio] {Entrada};
+        \node (pro1) [process, below of=in1] {Crear Arreglo};
+        \node (pro2) [process, below of=pro1] {Iterador = 0};
+        \node (pro3) [process, below of=pro2] {Buscar guion};
+        \node (pro5) [process, right of=pro3, xshift=2 cm] {Iterador++};
+        \node (dec1) [decision, below of=pro5, yshift = -0.5cm] {Condiciones};
+        \node (pro4) [process, right of=dec1, xshift=2cm] {Ver base};
+        \node (dec2) [decision, above of=pro4, yshift = 0.5cm]{¿Es base?};
+        \node (dec3) [decision, above of=dec2, yshift=0.5cm]{¿Mayor?};
+        \node (dec4) [decision, above of=dec3, yshift=1.5cm, text centered, text width=2.5cm]{¿Iterador=largo?};
+        \node (out1) [io, right of=dec3, xshift=3cm]{\'area};
+        \node (fin) [startstop, below of= out1] {Fin};
+        \draw [arrow] (inicio) -- (in1);
+        \draw [arrow] (in1) -- (pro1);
+        \draw [arrow] (pro1) -- (pro2);
+        \draw [arrow] (pro2) -- (pro3);
+        \draw [arrow] (pro3) |- (dec1);
+        \draw [arrow] (dec1) -- node[anchor=south]{s\'i}(pro4);
+        \draw [arrow] (dec1) -- node[anchor=west]{no}(pro5);
+        \draw [arrow] (pro5) -- (pro3);
+        \draw [arrow] (pro4) -- (dec2);
+        \draw [arrow] (dec2) -- node[anchor=west]{s\'i}(dec3);
+        \draw [arrow] (dec2) -- node[anchor=north]{no}(pro5);
+        \draw [arrow] (dec3) -- node[anchor=west]{no}(dec4);
+        \draw [arrow] (dec3) -- node[anchor=south]{s\'i}(out1);
+        \draw [arrow] (dec4) -- node[anchor=north]{no}(pro5);
+        \draw [arrow] (dec4) -- node[anchor=east]{s\'i}(out1);
+        \draw [arrow] (out1) -- (fin);
+      \end{tikzpicture}
+    \caption{Iterativo}
+    \end{figure}
+    \begin{figure}
+      \centering
+      \begin{tikzpicture}[node distance=2cm]
+        \node (inicio) [startstop] {Inicio};
+        \node (in1) [io, below of =inicio] {Arreglo};
+        \node (pro1)[process, below of=in1] {Fila = 0};
+        \node (pro2) [process, below of= pro1] {Analizar fila};
+        \node (dec1) [decision, below of= pro2, yshift=-1.5cm] {¿Existe sgte. base?};
+        \node (dec2) [decision, below of= dec1, yshift=-1.5cm] {¿Es blanca?};
+        \node (pro3) [process, left of=dec1, xshift=-1.5cm] {Fila++};
+        \node (pro4) [process, right of=dec1, xshift=1.5cm]{Calcular \'area.};
+        \node (out1) [io, right of=pro4, xshift=1.5cm]{\'area};
+        \node (end) [startstop, above of= out1]{Fin};
+        \draw [arrow] (inicio) -- (in1);
+        \draw [arrow] (in1) -- (pro1);
+        \draw [arrow] (pro1) -- (pro2);
+        \draw [arrow] (pro2) -- (dec1);
+        \draw [arrow] (dec1) -- node[anchor=east]{s\'i}(dec2);
+        \draw [arrow] (dec1) -- node[anchor=north]{no} (pro4);
+        \draw [arrow] (pro3) -- (pro2);
+        \draw [arrow] (dec2) -- node[anchor=north] {s\'i} (pro3);
+        \draw [arrow] (dec2) -- node [anchor=south]{no} (pro4);
+        \draw [arrow] (pro4) -- (out1);
+        \draw [arrow] (out1) -- (end);
+
+      \end{tikzpicture}
+      \caption{Recursi\'on}
+  \end{figure}
+
+  \subsubsection{Clase}
+  \begin{center}
+    \includegraphics[scale=0.5]{Superdiagrama2}
+  \end{center}
+
+
   \subsection{Iteraci\'on}
   La iteraci\'on se define como el acto de repetir un proceso. Esto, aplicado a las
   ciencias de la computaci\'on o la programaci\'on repercute en un ciclo, durante
-  el cual se repite una cierta acci\'on.\par
+  el cual se repite una cierta acci\'on.
+
+
   En el caso del problema propuesto, la soluci\'on iterativa se pens\'o como si
   se estuviera viendo un tri\'angulo cualquiera y se busc\'o la forma m\'as trivial
-  para encontrar los mayores tri\'angulos blancos.\par
+  para encontrar los mayores tri\'angulos blancos.
+
+
   La forma m\'as obvia es ir contando uno a uno los tri\'angulos blancos que forman
   otro mayor, y comparar, de estos, cual tiene un \'area mayor. Sin embargo, esta
   forma se vuelve muy poco eficiente para un tri\'angulo de muchas filas, puesto
@@ -181,7 +265,9 @@ tal que cada fila de \'este es un elemento en el arreglo. Luego, se recorre el
 arreglo, pasando por cada fila de la figura. En \'estas, se busca \'unicamente guiones,
 que representan nuestros tri\'angulos menores blancos. Dichos tri\'angulos se toman
 como una punta del tri\'angulo blanco, por lo que nos faltar\'ia ver si le podemos
-dar una base. Cabe mencionar que con hallar una punta, ya tenemos un \'area de 1.\par
+dar una base. Cabe mencionar que con hallar una punta, ya tenemos un \'area de 1.
+
+
 Como se buscan tri\'angulos dentro del original que obtuvimos, tenemos que asegurar
 que la posible base no se salga del tri\'angulo como en la figura \ref{fig:baseafuera}.
 Esto se hace teniendo en mente la consideraci\'on antes mencionada; que con dos
@@ -190,7 +276,9 @@ punta encontrada (dado por la paridad del \'indice donde fue encontrada), se ve
 que la base del tri\'angulo blanco no sea m\'as grande que la del tri\'angulo
 mayor, que el largo de la base sea menor que los l\'imites del mayor, y que, en
 el caso que la punta vea hacia la base del tri\'angulo mayor (\'indice impar), no
-nos pasemos de la punta del original.\par
+nos pasemos de la punta del original.
+
+
 Una vez cumplidas esas condiciones, tenemos que ver que tengamos una base blanca,
 efectivamente. Como sabemos la fila en la que encontramos la punta, y que, de nuevo,
 una fila m\'as grande implica dos tri\'angulos m\'as, podemos calcular la cantidad
@@ -218,17 +306,41 @@ ser\'ia la base de la punta.
   es decir, que algo se define ocup\'andose a si mismo. El caso m\'as com\'un es
   el del factorial, donde la funci\'on matem\'atica se define como;
   $n! = n(n-1)!$
-  \par
+
+
   Teniendo en cuenta esto, si lo aplicamos a programaci\'on, una funci\'on recursiva
   es una funci\'on que hace un llamado a si misma para lograr lo que tiene que hacer.
   L\'ogicamente, si no hay nada que la detenga, seguir\'ia por cuanto pueda. Es por
   esto que se ponen casos base, los cuales corresponden a lo \'ultimo que se puede
-  llegar siguiendo la recursi\'on.\par
+  llegar siguiendo la recursi\'on.
+  \subsubsection{Proceso}
+
+  Lo que hace este algoritmo es revisar fila por fila el tri\'angulo dado,
+  encontrando el m\'aximo de cada fila y compar\'andolo con la de la siguiente.
+  Esto lo realiza ocupando 4 argumentos: el tri\'angulo original, el tri\'angulo modificado,
+  la fila en la que va y el \'area m\'axima que ha encontrado. La recursi\'on lo que realiza es ir modificando
+  el tri\'angulo a la par que lo mantiene. Una vez encuentra el \'area mayor en una fila, se elimina dicha fila y
+  se busca en la siguiente. Para encontrar el \'area mayor dentro de una fila se hace algo
+  parecido a lo que se realiza en el metodo iterativo, va recorriendo tri\'angulo por tri\'angulo
+  encontrando el \'area m\'axima que se puede extraer dada una punta y lo compara con un m\'aximo predeterminado.
+
+
+  Para el c\'alculo de \'area de un solo tri\'angulo se va analizando el \'area que se puede conseguir dado una punta blanca,
+  por lo que el primer llamado a esta recursi\'on debe ser un tri\'angulo pequeño blanco. Para analizar el \'area
+  que se puede conseguir dado una punta se hacen ciertas verificaciones: que la siguiente fila pueda existir, y que
+  la siguiente fila est\'e compuesto s\'olo de tri\'angulos blancos. Si ambas cosas se cumplen, se posiciona en la nueva
+  base del tri\'angulo y se realiza el mismo an\'alisis, esto se repite hasta que las condiciones no se puedan
+  cumplir y se calcula el \'area en funci\'on de la base obtenida.
+
+  \subsection{Conclusi\'on}
 
 
 
-
-
+  A trav\'es del desarrollo del proyecto logramos encontrar m\'as de una soluci\'on al mismo
+  problema. De hecho, logramos encontrar m\'as que el par que se presenta, pero terminaron
+  descartadas por no ser lo suficientemente convincentes o porque, si bien se ten\'ia
+  la idea, no se sab\'ia c\'omo pasarlo a c\'odigo. Respecto a lo \'ultimo, queda claro
+  que es necesario m\'as estudio para poder realizar con \'exito un c\'odigo que ya tenemos ideado.
 
 
 

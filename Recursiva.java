@@ -56,36 +56,35 @@ public class Recursiva{
     int n = ((max - min)-1)/2 + 1;
     return (n*n);
   }
-  public static int area_mayor(String[] x){
-    /*Método que busca la mayor área. Inicia el área como cero, de tal forma que,
-    si se encuentra un area más grande, se reemplaza por esta. Va recorriendo por
-    fila hasta encontrar un triangulo blanco. Dependiendo de si el índice del String
-    donde se encontró el triangulo es par o impar, se manda a area punta o a area base,
-    respectivamente.*/
-    int max = 0; //area mayor
-    for (int i = 0; i < x.length; i++){
-      for (int j = 0; j < x[i].length(); j++){
-        int maximo = j + 1;
-        if( x[i].substring(j, maximo).equals("-")){
-          if( j%2 == 0){
-            if( max < area_punta(x, i, j, maximo)){
-              max = area_punta(x, i, j, maximo);
-            }
+  public static int area_mayor(String[] x, int i,int max){
+    for (int j = 0; j < x[i].length(); j++){
+      int maximo = j + 1;
+      if( x[i].substring(j, maximo).equals("-")){
+        if( j%2 == 0){
+          if( max < area_punta(x, i, j, maximo)){
+            max = area_punta(x, i, j, maximo);
           }
         }
-      }
-    }
-    for (int n = x.length -1; n >= 0; n--){
-      for ( int k = 0; k < x[n].length(); k++){
-        if( x[n].substring(k, k+1).equals("-")){
-          if( k%2 == 1){
-            if( max < area_base(x, n, k, k+1)){
-              max = area_base(x, n, k, k+1);
-            }
+        else{
+          if( max < area_base(x, i, j, maximo)){
+            max = area_base(x, i, j, maximo);
           }
         }
       }
     }
     return max;
+  }
+  public static int busca_filas(String[] x1, String[] x2, int row_number, int max){
+    if(x2.length == 0){
+      return max;
+    }
+    else{
+      String row = x2[x2.length-1];
+      String[] new_rows = new String[x2.length - 1];
+      for(int i=0; i < x2.length-1; i++){
+        new_rows[i] = x2[i+1];
+      }
+      return busca_filas(x1,new_rows,row_number+1,area_mayor(x1,row_number,max));
+    }
   }
 }
